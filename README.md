@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# Building Builder - React + Three.js Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive 3D building editor built with React, TypeScript, Three.js, and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create and edit 3D buildings in real-time
+- Adjust building dimensions, floors, and floor heights
+- Drag and drop building placement
+- Interactive 3D viewport with camera controls
+- Visual selection and transformation tools
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React + TypeScript
+- Three.js with @react-three/fiber
+- @react-three/drei for 3D utilities
+- Vite for build tooling
 
-- Configure the top-level `parserOptions` property like this:
+## Architecture
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Core Components
+
+- `Scene.tsx`: Main container with 3D canvas setup and state management
+- `Buildings.tsx`: Collection manager for building instances
+- `Building.tsx`: Individual building component
+- `BuildingMesh.tsx`: 3D mesh rendering
+- `BuildingMover.tsx`: Transform controls
+- `BuildingPopup.tsx`: Property editor UI
+
+### State Management
+
+Uses reducer pattern with:
+
+- `scene.state.ts`: State structure
+- `scene.actions.ts`: Action definitions
+- `scene.reducer.ts`: State updates
+
+## Getting Started
+
+1. Install dependencies:
+
+```bash
+yarn
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Start the development server:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+yarn dev
 ```
+
+The application will be available at `http://localhost:5173`.
+
+## Usage
+
+1. Click "Add Building" to create a new building
+2. Select a building to edit its properties
+3. Use transform controls to move buildings
+4. Adjust camera view with mouse controls:
+   - Left click + drag to rotate
+   - Right click + drag to pan
+   - Scroll to zoom
